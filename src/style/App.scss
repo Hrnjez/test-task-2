@@ -1,0 +1,102 @@
+@mixin btn {
+    background:#4EAD43;
+    padding:0.6rem 1.8rem;
+    border:0;
+    color:#fff;
+    display:block;
+    width:100px;
+    text-align: center;
+    transition:300ms;
+    border-top:0 solid #fff;
+    border-bottom:0 solid #fff;
+    &:hover {
+        box-shadow:
+        0 0.1px 2.5px rgba(0, 0, 0, 0.105),
+        0 0.3px 5.3px rgba(0, 0, 0, 0.15),
+        0 0.6px 8.8px rgba(0, 0, 0, 0.195),
+        0 2px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+.header {
+    margin:auto;
+    margin-top:2rem;
+    text-align: center;
+}
+.post-listing {
+    width:70%;
+    margin:auto;
+    
+    .post {
+        box-shadow: 2px 2px 5px grey;
+        display: flex;
+        margin: 2rem auto;
+        .post-img {
+            background:grey;
+            flex:1;
+            min-width: 230px;
+        }
+        .post-content {
+            flex:3;
+            padding: 1rem 3rem;
+            h2 {
+                margin-top:0;
+                font-size:30px;
+                
+            }
+            p {
+                display: block;
+                text-overflow: ellipsis;
+                word-wrap: break-word;
+                overflow: hidden;
+                max-height: 3.9em;
+                line-height: 1.3em;
+                
+            }
+        }
+        .btn {
+            @include btn;
+        }
+    }
+}
+.single-post {
+    width:80%;
+    margin:auto;
+    margin-top:3rem;
+    .btn {
+        @include btn;
+        margin:3rem 0;
+    }
+    .single-post-header {
+        height: 50vw;
+        max-height: 600px;
+        display: flex;
+        flex-direction: column;
+        box-shadow:2px 2px 5px grey;
+        margin-bottom:5rem;
+        .single-post-img {
+            background:grey;
+            flex:5;
+        }
+        .single-post-title {
+            flex:1;
+            padding-left: 3rem;
+            font-size: 25px;
+            h1 {
+                margin-bottom:0;
+                width:80%;
+            }
+            .title-icons {
+                float:right;
+                font-size:20px;
+                margin-right:1rem;
+                margin-bottom:1rem;
+                .fab {
+                    border:2px solid rgb(41, 41, 41);
+                    border-radius:100px;
+                    padding:0.5rem 0.6rem;
+                    font-size:13px;
+                }
+            }
+        }
+    }
+}

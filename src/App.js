@@ -1,24 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import './style/App.css';
+import Header from './components/Header'
+import PostListing from './components/PostListing'
+import SinglePost from './components/SinglePost'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [postListing, setPostListing] = useState([]);
+
+  useEffect(() => {
+    const fetchingPosts = async () => {
+      const res = await fetch('http://cloverlabs.io/wp-json/wp/v2/posts')
+      const data = await res.json();
+      console.log(data);
+      setPostListing(data);
+    }
+    fetchingPosts();
+  }, [])
+
+  const singlePostHandler = (e) => {
+    const currentUser = e.currentTarget.getAttribute('value');
+    console.log(currentUser);
+  } 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+     <Header />
+     <Route path='/' exact  render={(props) => (
+       <>
+       <PostListing 
+          postListing={postListing}
+          singlePost={singlePostHandler} 
+       />
+       </>
+     )}/>
+     {postListing.map((post) => (
+        <Route key={post.id}  path={`/${post.id}`} render={(props) => (
+          <>
+          <SinglePost 
+            title={post.title.rendered}
+            content={post.content.rendered}
+          />
+          </>
+        )}/>
+     ))}
+   
+
+    </Router>
   );
 }
 
