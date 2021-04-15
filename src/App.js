@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     const fetchingPosts = async () => {
-      const res = await fetch('http://cloverlabs.io/wp-json/wp/v2/posts')
+      const res = await fetch('https://cloverlabs.io/wp-json/wp/v2/posts')
       const data = await res.json();
       console.log(data);
       setPostListing(data);
